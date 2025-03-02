@@ -17,10 +17,10 @@ public class PlayerController : MonoBehaviour
         
     }
 
-
     public void SetPostion(Vector3 postion)
     {
         this.transform.localPosition = postion;
     }
+
 
 }

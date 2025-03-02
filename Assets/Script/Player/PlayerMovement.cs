@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour, IMovement
 {
 
-    [SerializeField] private float speed;
+   
 
     private Rigidbody rb;
     private Animator animator;
@@ -23,24 +23,15 @@ public class PlayerMovement : MonoBehaviour, IMovement
 
     private void Update()
     {
-        //GetInput();
-
 
         Movement();
     }
 
-    private void GetInput()
-    {
-        float dirX = Input.GetAxis("Horizontal");
-        float dirZ = Input.GetAxis("Vertical");
-
-        directionMovement = new Vector3(dirX,0, dirZ);
-
-    }
+  
 
     private void Movement()
     {
-        rb.velocity = directionMovement*speed;
+      
         bool isMove = directionMovement.magnitude > 0.2f;
         animator.SetBool("IsRun", isMove);
         if(isMove)

@@ -14,6 +14,4 @@ public class PlayerController : MonoBehaviour
         playerUI  = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();   
         playerUI.Initialize(playerMovement);
     }
-
-
 }

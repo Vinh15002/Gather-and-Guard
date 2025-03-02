@@ -1,9 +1,14 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArmyPlayer : MonoBehaviour
 {
+
+
+    public GameObject playerPrefab;
     public List<PlayerController> players;
 
 
@@ -27,14 +32,28 @@ public class ArmyPlayer : MonoBehaviour
                 players.Add(t.GetComponent<PlayerController>());
             }
         }
+        SetHorizontal();
     }
 
 
-    public void AddPlayer(Transform player)
+    private void OnEnable()
     {
-        player.transform.parent = transform;
-        players.Add(player.GetComponent<PlayerController>());
+        PlayerEvent.addPlayer += AddPlayer;
     }
+
+    private void OnDisable()
+    {
+        PlayerEvent.addPlayer -= AddPlayer;
+    }
+
+    private void AddPlayer(Vector3 postion)
+    {
+        GameObject game =  Instantiate(playerPrefab, postion, Quaternion.identity, transform);
+        players.Add(game.GetComponent<PlayerController>());
+        SetHorizontal();
+    }
+
+    
 
 
     [ContextMenu("Horizontal")]

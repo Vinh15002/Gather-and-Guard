@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
+
 public  class AddPlayer : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("MainPlayer"))
+        if (other.CompareTag("Player"))
         {
-            other.GetComponent<ArmyPlayer>().AddPlayer(transform.parent);
+            PlayerEvent.addPlayer?.Invoke(transform.position);
+            this.gameObject.SetActive(false);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IMovement
 {
 
     [SerializeField] private float speed;
@@ -23,10 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        GetInput();
+        //GetInput();
 
 
-        OnMove();
+        Movement();
     }
 
     private void GetInput()
@@ -38,8 +38,21 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void OnMove()
+    private void Movement()
     {
         rb.velocity = directionMovement*speed;
+        bool isMove = directionMovement.magnitude > 0.2f;
+        animator.SetBool("IsRun", isMove);
+        if(isMove)
+        {
+            Quaternion rotate = Quaternion.LookRotation(directionMovement);
+            rb.rotation = rotate;
+        }
+    }
+
+    public void OnMove(Vector3 direction)
+    {
+       
+        directionMovement = direction;
     }
 }

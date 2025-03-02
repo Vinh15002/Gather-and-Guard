@@ -1,17 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private PlayerMovement playerMovement;
-    [SerializeField]private PlayerUI playerUI;
 
-
+    public void onMove(Vector3 directionMovement)
+    {
+        playerMovement.OnMove(directionMovement);
+    }
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
   
-        playerUI  = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();   
-        playerUI.Initialize(playerMovement);
+        
     }
+
+    public void SetPostion(Vector3 postion)
+    {
+        this.transform.localPosition = postion;
+    }
+
+
 }

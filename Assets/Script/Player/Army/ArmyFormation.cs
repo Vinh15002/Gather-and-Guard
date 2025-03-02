@@ -80,13 +80,24 @@ public class ArmyFormation
             if (count > amount) break;
         }
 
-       
-  
-
         return result;
        
     }
 
+    public static List<Vector3> Rectangle(int amount){
+        List<Vector3> result = new List<Vector3>();
+        int col = Mathf.CeilToInt(Mathf.Sqrt(amount));
+        
+        if(col%2==0){
+            
+        }
+        else{
+            result.Add(Vector3.zero);
 
+        }
+
+
+        return result;
+    }
 
 }

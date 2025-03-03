@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,7 +12,7 @@ public class PlayerController : MonoBehaviour
         playerMovement.OnMove(directionMovement);
     }
 
-    private void Start()
+    private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
   
@@ -19,8 +21,12 @@ public class PlayerController : MonoBehaviour
 
     public void SetPostion(Vector3 postion)
     {
-        this.transform.localPosition = postion;
+
+        this.transform.DOLocalMove(postion, 1f);
+        
+        
+
     }
 
-
+   
 }

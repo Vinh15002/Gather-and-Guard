@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 
@@ -60,6 +60,7 @@ public class ArmyFormation
         int h = Mathf.FloorToInt(Mathf.Sqrt(amount));
       
         if (h * h != amount) h++;
+
         int count = 3;
         result.Add(new Vector3(-(h-1), 0, 0));
         result.Add(new Vector3((h-1), 0, 0));
@@ -75,9 +76,9 @@ public class ArmyFormation
             {
                 result.Add(new Vector3(j, 0, i));
                 count++;
-                if(count > amount) break;
+                if(count >= amount) break;
             }
-            if (count > amount) break;
+            if (count >= amount) break;
         }
 
         return result;

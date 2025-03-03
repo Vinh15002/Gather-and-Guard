@@ -46,4 +46,7 @@ public class PlayerMovement : MonoBehaviour, IMovement
        
         directionMovement = direction;
     }
+
+
+    
 }

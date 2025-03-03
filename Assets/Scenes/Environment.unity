@@ -241,7 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9b61b936f0d214585bdf4591e5a126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  n: 4
+  totalObjects: 9
+  vector3List: []
 --- !u!4 &497453269
 Transform:
   m_ObjectHideFlags: 0

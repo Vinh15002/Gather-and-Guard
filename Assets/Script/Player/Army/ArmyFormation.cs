@@ -85,19 +85,56 @@ public class ArmyFormation
     }
 
     public static List<Vector3> Rectangle(int amount){
-        List<Vector3> result = new List<Vector3>();
-        int col = Mathf.CeilToInt(Mathf.Sqrt(amount));
-        
-        if(col%2==0){
-            
-        }
-        else{
-            result.Add(Vector3.zero);
 
-        }
+        int rows = Mathf.CeilToInt(Mathf.Sqrt(amount));
+        int cols = Mathf.CeilToInt((float)amount / rows);
+        Vector2 shiftCenter = new Vector2(cols/2, rows/2);
+
+        Vector2[,] matrix = new Vector2[rows,cols];
+        CreateMatrix(amount, matrix, rows, cols);
+        List<Vector3> result = CreateVector3List(matrix,shiftCenter);
 
 
         return result;
+    }
+
+    public static void CreateMatrix(int total, Vector2[,] matrix, int rows, int cols)
+    {
+
+        int index = 0;
+        for (int x = 0; x < rows; x++)
+        {
+            for (int y = 0; y < cols; y++)
+            {
+                if (index < total)
+                {
+                    matrix[x, y] = new Vector2(x, y); 
+                    index++;
+                }
+                else
+                {
+                    matrix[x, y] = new Vector2(-1, -1); 
+                }
+            }
+        }
+    }
+
+    public static List<Vector3> CreateVector3List(Vector2[,] matrix, Vector2 shiftCenter)
+    {
+        List<Vector3> vector3List = new List<Vector3>();
+
+        for (int x = 0; x < matrix.GetLength(0); x++)
+        {
+            for (int y = 0; y < matrix.GetLength(1); y++)
+            {
+                if (matrix[x, y].x != -1 && matrix[x, y].y != -1)
+                {
+                    vector3List.Add(new Vector3(matrix[x, y].x -shiftCenter.x , 0, matrix[x, y].y-shiftCenter.y)); 
+                }
+            }
+        }
+
+        return vector3List;
     }
 
 }

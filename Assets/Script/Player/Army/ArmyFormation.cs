@@ -11,43 +11,76 @@ public class ArmyFormation
     public static List<Vector3> Horizontal(int amount)
     {
         List<Vector3> result = new List<Vector3>();
-        result.Add(Vector3.zero);
-
-        int index = 1;
-
-        for(int i = 1; i< amount; i++)
+       
+       
+        int index = 0;
+        for (int i = 1; i <= amount; i++)
         {
-            result.Add(new Vector3(index, 0, 0));
-          
-            if (index > 0) index = -index;
+            if(i < 9)
+            {
+                result.Add(new Vector3(index, 0, 0));
+            }
+            else
+            {
+                result.Add(new Vector3(index, 0, 1));
+            }
+            if (index == 0) index = 1;
+            else if (index > 0) index = -index;
             else
             {
                 index = -index;
                 index++;
             }
+           
+            if (index == -4) index = 0;
+
         }
+           
+
+
+        
+
+        
         return result;
     }
 
     public static List<Vector3> Vertical(int amount)
     {
+
+
         List<Vector3> result = new List<Vector3>();
-        result.Add(Vector3.zero);
 
-        int index = 1;
 
-        for (int i = 1; i < amount; i++)
+        int index = 0;
+        for (int i = 1; i <= amount; i++)
         {
-            result.Add(new Vector3(0, 0, index));
-          
-            if (index > 0) index = -index;
+            if (i < 9)
+            {
+                result.Add(new Vector3(0, 0, index));
+            }
+            else
+            {
+                result.Add(new Vector3(1, 0, index));
+            }
+            if (index == 0) index = 1;
+            else if (index > 0) index = -index;
             else
             {
                 index = -index;
                 index++;
             }
+            Debug.Log(index);
+            if (index == -4) index = 0;
+
         }
+
+
+
+
+
+
         return result;
+      
     }
 
 

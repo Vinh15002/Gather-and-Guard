@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EnemyWeaponAttack : MonoBehaviour
 {
+
+
+    [SerializeField] private float timeDealDamge = 1f;
     [SerializeField] private float _timeDealDame = 1f;
 
     private bool canAttack => _timeDealDame <= 0;
@@ -30,7 +33,8 @@ public class EnemyWeaponAttack : MonoBehaviour
     
         if (other.CompareTag("Player") && canAttack)
         {
-            Debug.Log("Goblin Deal Damage");
+         
+            _timeDealDame = timeDealDamge;
         }
     }
 

@@ -7,10 +7,20 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && GetComponentInParent<EnemyControl>().Target == other.transform)
         {
            
             OnAttack(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && GetComponentInParent<EnemyControl>().Target == other.transform)
+        {
+            GetComponentInParent<EnemyControl>().isAttack = false;
+
+
         }
     }
 

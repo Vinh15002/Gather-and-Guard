@@ -9,7 +9,7 @@ public class ArmyPlayer : MonoBehaviour
 
 
     public GameObject playerPrefab;
-    public List<PlayerController> players;
+    public List<SoldierController> players;
 
 
    
@@ -24,12 +24,12 @@ public class ArmyPlayer : MonoBehaviour
         playerUI = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
         armyMovement = GetComponent<ArmyMovement>();
         playerUI.Initialize(armyMovement);
-        players = new List<PlayerController>();
+        players = new List<SoldierController>();
         foreach(Transform t in transform)
         {
             if (t.gameObject.CompareTag("Player"))
             {
-                players.Add(t.GetComponent<PlayerController>());
+                players.Add(t.GetComponent<SoldierController>());
             }
         }
         SetHorizontal();
@@ -49,7 +49,8 @@ public class ArmyPlayer : MonoBehaviour
     private void AddPlayer(Vector3 postion)
     {
         GameObject game =  Instantiate(playerPrefab, postion, Quaternion.identity, transform);
-        players.Add(game.GetComponent<PlayerController>());
+    
+        players.Add(game.GetComponent<SoldierController>());
         SetHorizontal();
     }
 
@@ -61,10 +62,7 @@ public class ArmyPlayer : MonoBehaviour
     {
         List<Vector3> lineup = ArmyFormation.Horizontal(players.Count);
         for(int i = 0; i < lineup.Count; i++) {
-
             players[i].SetPostion(lineup[i]);
-            
-        
         }
     }
 
@@ -96,7 +94,6 @@ public class ArmyPlayer : MonoBehaviour
     }
 
     [ContextMenu("Rectangle")]
-
     public void Rectangle()
     {
         List<Vector3> lineup = ArmyFormation.Rectangle(players.Count);

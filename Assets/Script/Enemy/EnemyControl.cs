@@ -34,16 +34,18 @@ public class EnemyControl : MonoBehaviour
         }
         else
         {
-            animator.SetBool("IsAttack", false);
+            
             if (target != null)
             {
-                enemyMovement.SetDirection(target.position- this.transform.position);
                 animator.SetBool("IsMove", true);
+                enemyMovement.SetDirection(target.position - this.transform.position);
+               
             }
             else
             {
                 animator.SetBool("IsMove", false);
             }
+            animator.SetBool("IsAttack", false);
         }
        
     }

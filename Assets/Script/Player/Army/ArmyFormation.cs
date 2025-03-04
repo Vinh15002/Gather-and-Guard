@@ -69,7 +69,7 @@ public class ArmyFormation
                 index = -index;
                 index++;
             }
-            Debug.Log(index);
+          
             if (index == -4) index = 0;
 
         }

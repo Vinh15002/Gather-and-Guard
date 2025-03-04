@@ -26,7 +26,7 @@ public class ArmyMovement : MonoBehaviour, IMovement
     private void Movement()
     {
         transform.Translate(directionMovement * Time.deltaTime*speed);
-        foreach (PlayerController contrl in units.players)
+        foreach (SoldierController contrl in units.players)
         {
             contrl.onMove(directionMovement);
         }

@@ -9,6 +9,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+           
             OnAttack(other.gameObject);
         }
     }

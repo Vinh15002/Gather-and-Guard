@@ -5,11 +5,10 @@ public class EnemyControl : MonoBehaviour
 {
 
     private EnemyMovement enemyMovement;
-
     private Animator animator;
-
-
     public bool isAttack = false;
+    public Transform Target => target;
+    protected Transform target;
     
 
     private void Start()
@@ -22,10 +21,11 @@ public class EnemyControl : MonoBehaviour
 
     protected void Update()
     {
-        ChangeAnimation();
+        
+        ChangeState();
     }
 
-    protected void ChangeAnimation()
+    protected void ChangeState()
     {
         if(isAttack)
         {
@@ -37,6 +37,7 @@ public class EnemyControl : MonoBehaviour
             animator.SetBool("IsAttack", false);
             if (target != null)
             {
+                enemyMovement.SetDirection(target.position- this.transform.position);
                 animator.SetBool("IsMove", true);
             }
             else
@@ -46,15 +47,13 @@ public class EnemyControl : MonoBehaviour
         }
        
     }
-
-    public Transform Target => target;
-    protected Transform target;
-    public void SetTarget(Transform transform)
+    public void SetTarget(Transform transPlayer)
     {
-        if(transform != null)
+
+        if(transPlayer != null)
         {
-            target = transform;
-            enemyMovement.SetDirection(target.position - transform.position);
+            target = transPlayer;
+            enemyMovement.SetDirection(target.position - this.transform.position);
         }
         else
         {

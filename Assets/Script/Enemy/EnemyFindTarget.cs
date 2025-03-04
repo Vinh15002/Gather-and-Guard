@@ -10,6 +10,7 @@ public class EnemyFindTarget : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            
             GetComponentInParent<EnemyControl>().SetTarget(other.transform);
         }
     }

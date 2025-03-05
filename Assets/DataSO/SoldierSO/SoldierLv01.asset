@@ -15,4 +15,5 @@ MonoBehaviour:
   Health: 100
   Damage: 10
   LocalScale: 1
-  RangeAttack: 5
+  RangeAttack: 10
+  CoolDownAttack: 2

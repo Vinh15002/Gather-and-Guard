@@ -1,18 +1,25 @@
 ﻿
 
+using System.Threading.Tasks;
+using Script.ObjectPooling;
+using Script.Weapon;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class AttackState : BaseState
 {
+
+    private float timeAttack = 0f;
     public AttackState(SoldierController soldierController, SoldierData soldierData, ManagerState managerState, string animName) : base(soldierController, soldierData, managerState, animName)
     {
-
+        
     }
 
 
     public override void OnExecute()
     {
         base.OnExecute();
+        
 
         if (soldierController.DirectionMovement.magnitude > 0.3)
         {
@@ -27,8 +34,33 @@ public class AttackState : BaseState
 
 
         RotateDirectionAttack();
+        Attack();
 
     }
+
+    private void Attack()
+    {
+        if (timeAttack <= 0)
+        {
+
+          
+            GameObject weapon = WeaponPooling.Instance.GetPooledObject();
+            weapon.transform.position = soldierController.WeaponTarget.transform.position;
+            soldierController.RemoveWeapon();
+            weapon.SetActive(true);
+            weapon.GetComponent<WeaponMovement>().SetTarget(soldierController.target.position, weapon.transform.position, soldierData.CoolDown);
+            
+            timeAttack = soldierData.CoolDown;
+        }
+        else
+        {
+            
+            timeAttack -=  Time.deltaTime;
+        }
+
+    }
+
+    
 
 
     private bool CheckDistance()

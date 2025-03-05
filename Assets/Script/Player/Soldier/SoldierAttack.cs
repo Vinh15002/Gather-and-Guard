@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using UnityEngine;
 
 public class SoldierAttack : MonoBehaviour
@@ -26,6 +27,7 @@ public class SoldierAttack : MonoBehaviour
         {
             OnAttack(hit[0]);
         }
+        
   
     }
 
@@ -33,7 +35,7 @@ public class SoldierAttack : MonoBehaviour
 
     private void OnAttack(Collider collider)
     {
-        if(soldierController.DirectionMovement.magnitude <= 0.3)
+        if(soldierController.DirectionMovement.magnitude <= 0.3 && collider.CompareTag("Enemy"))
         {
             soldierController.SetAttack(collider);
         }
@@ -45,4 +47,7 @@ public class SoldierAttack : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
+
+
+
 }

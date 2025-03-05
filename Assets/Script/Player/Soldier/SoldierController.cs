@@ -1,16 +1,22 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class SoldierController : MonoBehaviour
 {
-   
-    public Vector3 DirectionMovement { get;set; }
 
-   
+    public Transform WeaponTarget;
+    public Vector3 DirectionMovement { get;set; }
     public SoldierData SoldierData { get ; private set;}
     public Animator Animator {  get; private set; }
     public Rigidbody RB { get; private set; }
+
+    
+    
+    
+    #region  State Machine
+
     public ManagerState ManagerState { get; private set; }
     public IdleState Idle { get; private set; }
     public MoveState Move {  get; private set; }
@@ -20,14 +26,11 @@ public class SoldierController : MonoBehaviour
     public Transform target { get; private set; }
 
 
+    #endregion
+    
 
-    private void Awake()
-    {
-       
-       
 
-        
-    }
+    
 
     private void Start()
     {
@@ -68,8 +71,23 @@ public class SoldierController : MonoBehaviour
         target = collider.transform;
         ManagerState.ChangeState(Attack);
        
-       
     }
+
+
+    public void RemoveWeapon()
+    {
+        StartCoroutine(RemoveWeaponCouroutine());
+    }
+
+    private IEnumerator RemoveWeaponCouroutine()
+    {
+        yield return new WaitForSeconds(0.3f);
+        this.WeaponTarget.gameObject.SetActive(false);
+        yield return new WaitForSeconds(SoldierData.CoolDown - 0.3f);
+        this.WeaponTarget.gameObject.SetActive(true);
+    }
+
+ 
 
 
 }

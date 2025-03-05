@@ -5,7 +5,7 @@ public class EnemyControl : MonoBehaviour
 {
 
     private EnemyMovement enemyMovement;
-    private Animator animator;
+    [HideInInspector] public Animator animator;
     public bool isAttack = false;
     public Transform Target => target;
     protected Transform target;
@@ -31,6 +31,8 @@ public class EnemyControl : MonoBehaviour
         {
             animator.SetBool("IsAttack", true);
             enemyMovement.SetDirection(Vector3.zero);
+            
+            
         }
         else
         {

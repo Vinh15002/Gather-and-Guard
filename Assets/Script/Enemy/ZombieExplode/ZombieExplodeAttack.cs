@@ -13,5 +13,6 @@ public class ZombieExplodeAttack : EnemyAttack
     public void DestroyEnemy(){
         Instantiate(explode,transform.position,Quaternion.identity);
         transform.parent.gameObject.SetActive(false);
+        Debug.Log("Take dame player");
     }
 }

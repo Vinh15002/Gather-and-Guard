@@ -45,9 +45,8 @@ namespace  Script.Weapon
                 
             }
 
-            yield return new WaitForSeconds(0.2f);
+            StartCoroutine(DestroyObjectCourutine());
             
-            this.gameObject.SetActive(false);
         }
 
 
@@ -65,6 +64,13 @@ namespace  Script.Weapon
             );
 
             rb.velocity = velocity;
+        }
+        
+        
+        public IEnumerator DestroyObjectCourutine()
+        {
+            yield return new WaitForSeconds(0.2f);
+            this.gameObject.SetActive(false);   
         }
 
       

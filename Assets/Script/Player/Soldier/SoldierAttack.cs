@@ -35,7 +35,7 @@ public class SoldierAttack : MonoBehaviour
 
     private void OnAttack(Collider collider)
     {
-        if(soldierController.DirectionMovement.magnitude <= 0.3 && collider.CompareTag("Enemy"))
+        if(soldierController.DirectionMovement.magnitude <= 0.3)
         {
             soldierController.SetAttack(collider);
         }

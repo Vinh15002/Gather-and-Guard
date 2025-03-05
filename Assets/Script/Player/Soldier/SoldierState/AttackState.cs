@@ -12,7 +12,7 @@ public class AttackState : BaseState
     private float timeAttack = 0f;
     public AttackState(SoldierController soldierController, SoldierData soldierData, ManagerState managerState, string animName) : base(soldierController, soldierData, managerState, animName)
     {
-        
+        timeAttack = 0f;
     }
 
 
@@ -44,12 +44,9 @@ public class AttackState : BaseState
         {
 
           
-            GameObject weapon = WeaponPooling.Instance.GetPooledObject();
-            weapon.transform.position = soldierController.WeaponTarget.transform.position;
-            soldierController.RemoveWeapon();
-            weapon.SetActive(true);
-            weapon.GetComponent<WeaponMovement>().SetTarget(soldierController.target.position, weapon.transform.position, soldierData.CoolDown);
-            
+           
+            soldierController.SpawnWeapon();
+          
             timeAttack = soldierData.CoolDown;
         }
         else

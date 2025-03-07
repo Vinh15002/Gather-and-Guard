@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Script.ObjectPooling;
+using Script.Player.Soldier;
 using Script.Weapon;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class SoldierController : MonoBehaviour
     public SoldierData SoldierData { get ; private set;}
     public Animator Animator {  get; private set; }
     public Rigidbody RB { get; private set; }
+    
+    public SoliderHealth SoliderHealth { get; private set; }
 
     
     
@@ -29,23 +32,26 @@ public class SoldierController : MonoBehaviour
 
 
     #endregion
-    
 
 
-    
+    private void Awake()
+    {
+        SoldierData = GetComponent<SoldierData>();
+        SoliderHealth = GetComponent<SoliderHealth>();
+    }
+
 
     private void Start()
     {
         
         ManagerState = new ManagerState();
-        SoldierData = GetComponent<SoldierData>();
         Idle = new IdleState(this, SoldierData, ManagerState, "Idle");
         Move = new MoveState(this, SoldierData, ManagerState, "Move");
         Attack = new AttackState(this, SoldierData, ManagerState, "Attack");
         transform.localScale = Vector3.one * SoldierData.LocalScale;
         Animator = GetComponent<Animator>();
-        
         RB = GetComponent<Rigidbody>();
+        
         ManagerState.Initilize(Idle);
     }
 

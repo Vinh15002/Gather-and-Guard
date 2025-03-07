@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ArmyMovement : MonoBehaviour, IMovement
 {
-    [SerializeField] private float speed;
+    public float Speed { get; private set; }
 
     private ArmyPlayer units;
 
@@ -11,9 +11,15 @@ public class ArmyMovement : MonoBehaviour, IMovement
 
     private void Start()
     {
+        Speed = 4f;
         units = GetComponent<ArmyPlayer>();
     }
 
+
+    public void SetSpeed(float speed)
+    {
+        this.Speed *= speed;
+    }
 
 
     private void Update()
@@ -25,8 +31,8 @@ public class ArmyMovement : MonoBehaviour, IMovement
 
     private void Movement()
     {
-        transform.Translate(directionMovement * Time.deltaTime*speed);
-        foreach (SoldierController contrl in units.players)
+        transform.Translate(directionMovement * Time.deltaTime*Speed);
+        foreach (SoldierController contrl in units.Players)
         {
             contrl.onMove(directionMovement);
         }

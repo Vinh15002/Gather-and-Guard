@@ -24,6 +24,7 @@ namespace Script.TowerDefend.HouseSO
 
         public void Damage(int dame)
         {
+          
             currentHP  = currentHP >= dame ? currentHP-dame: 0;
            
             transform.DOScale(transform.localScale * 0.98f, 0.1f);

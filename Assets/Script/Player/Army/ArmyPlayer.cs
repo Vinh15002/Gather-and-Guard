@@ -1,8 +1,10 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Script.Event;
 using Script.Player.Army;
+using Script.Player.Army.ArmyLineUp;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,32 +13,60 @@ public class ArmyPlayer : MonoBehaviour
 
 
     public GameObject playerPrefab;
-    public List<SoldierController> players;
+    public List<SoldierController> Players { get; private set; }
 
 
    
     [SerializeField] private PlayerUI playerUI;
-    private ArmyMovement armyMovement;
+    public ArmyMovement ArmyMovement { get; private set; }
 
-    
+
+    #region  State Army 
+
     private LineUp lineUp = LineUp.Horizontal; 
+    public ManagerLineUp ManagerLineUp { get; private set; }
+    public HorizontalLineUp HorizontalLineUp { get; private set; }
+    public VerticalLineUp VerticalLineUp { get; private set; }
+    public TriangleLineUp  TriangleLineUp { get; private set; }
+    public RectangleLineUp RectangleLineUp { get; private set; }
+
+    #endregion
     
+
+    private void Awake()
+    {
+        
+        Players = new List<SoldierController>();
+        foreach(Transform t in transform)
+        {
+            if (t.gameObject.CompareTag("Player"))
+            {
+                Players.Add(t.GetComponent<SoldierController>());
+            }
+        }
+        
+        ManagerLineUp = new ManagerLineUp();
+        this.HorizontalLineUp = new HorizontalLineUp(this);
+        this.VerticalLineUp = new VerticalLineUp(this);
+        this.RectangleLineUp = new RectangleLineUp(this);
+        this.TriangleLineUp = new TriangleLineUp(this);
+
+
+    }
 
 
     private void Start()
     {
         playerUI = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
-        armyMovement = GetComponent<ArmyMovement>();
-        playerUI.Initialize(armyMovement);
-        players = new List<SoldierController>();
-        foreach(Transform t in transform)
-        {
-            if (t.gameObject.CompareTag("Player"))
-            {
-                players.Add(t.GetComponent<SoldierController>());
-            }
-        }
-        SetHorizontal();
+        ArmyMovement = GetComponent<ArmyMovement>();
+        playerUI.Initialize(ArmyMovement);
+        
+        this.ManagerLineUp.Initialize(HorizontalLineUp);
+    }
+
+    private void Update()
+    {
+        ManagerLineUp.CurrentLineUp.OnExecuteLineUp();
     }
 
 
@@ -56,7 +86,7 @@ public class ArmyPlayer : MonoBehaviour
     {
         GameObject game =  Instantiate(playerPrefab, postion, Quaternion.identity, transform);
     
-        players.Add(game.GetComponent<SoldierController>());
+        Players.Add(game.GetComponent<SoldierController>());
         ChangeLineUpArmy(this.lineUp);
     }
 
@@ -64,74 +94,72 @@ public class ArmyPlayer : MonoBehaviour
     {
         if (lineUp == LineUp.Horizontal)
         {
-            SetHorizontal();
+            ManagerLineUp.ChangeLineUp(this.HorizontalLineUp);
         }
         else if (lineUp == LineUp.Vertical)
         {
-            SetVertical();
+            ManagerLineUp.ChangeLineUp(this.VerticalLineUp);
         }
         else if (lineUp == LineUp.Triangle)
         {
-            if (players.Count <= 3) return;
-            else SetTriangle();
+            if (Players.Count <= 3) return;
+            else ManagerLineUp.ChangeLineUp(this.TriangleLineUp);
         }
         else if (lineUp == LineUp.Rectangle)
         {
-            if (players.Count <= 3) return;
-            else SetRectangle();
+            
+            if (Players.Count <= 3) return;
+            else ManagerLineUp.ChangeLineUp(this.RectangleLineUp);
         }
 
         this.lineUp = lineUp;
     }
 
+    
 
-    [ContextMenu("Horizontal")]
     public void SetHorizontal()
     {
-        List<Vector3> lineup = ArmyFormation.Horizontal(players.Count);
+        List<Vector3> lineup = ArmyFormation.Horizontal(Players.Count);
         for(int i = 0; i < lineup.Count; i++) {
-            players[i].SetPostion(lineup[i]);
+            Players[i].SetPostion(lineup[i]);
         }
+        
     }
 
-    [ContextMenu("Vertical")]
+
     public void SetVertical()
     {
-        List<Vector3> lineup = ArmyFormation.Vertical(players.Count);
+        List<Vector3> lineup = ArmyFormation.Vertical(Players.Count);
         for (int i = 0; i < lineup.Count; i++)
         {
 
-            players[i].SetPostion(lineup[i]);
+            Players[i].SetPostion(lineup[i]);
 
 
         }
     }
 
-    [ContextMenu("Triangle")]
+
     public void SetTriangle()
     {
-        List<Vector3> lineup = ArmyFormation.Triangle(players.Count);
+        List<Vector3> lineup = ArmyFormation.Triangle(Players.Count);
         
         for (int i = 0; i < lineup.Count; i++)
         {
 
-            players[i].SetPostion(lineup[i]);
+            Players[i].SetPostion(lineup[i]);
 
 
         }
     }
 
-    [ContextMenu("Rectangle")]
+
     public void SetRectangle()
     {
-        List<Vector3> lineup = ArmyFormation.Rectangle(players.Count);
-        
+        List<Vector3> lineup = ArmyFormation.Rectangle(Players.Count);
         for (int i = 0; i < lineup.Count; i++)
         {
-
-            players[i].SetPostion(lineup[i]);
-
-
+            Players[i].SetPostion(lineup[i]);
         }
     }
 

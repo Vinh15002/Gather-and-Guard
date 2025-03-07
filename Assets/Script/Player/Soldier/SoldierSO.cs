@@ -12,4 +12,8 @@ public  class SoldierSO : ScriptableObject
     public float RangeAttack = 5;
 
     public float SpeedAttack = 1f;
+
+    public int Armor = 5;
+    
+    public float RateDodge = 5f;
 }

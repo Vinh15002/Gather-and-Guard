@@ -17,6 +17,7 @@ namespace Script.Player.Army.ArmyLineUp
             controller.SetVertical();
             IncreaseSpeed();
             IncreaseDodge();
+            this.SpawnEffect(LineUp.Vertical);
             
         }
 

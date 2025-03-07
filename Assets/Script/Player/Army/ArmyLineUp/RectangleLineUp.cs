@@ -15,6 +15,7 @@ namespace Script.Player.Army.ArmyLineUp
             controller.SetRectangle();
            
             IncreaseSpeed();
+            this.SpawnEffect(LineUp.Rectangle);
         }
         
         

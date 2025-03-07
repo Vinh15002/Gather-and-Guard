@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Script.ObjectPooling;
 
 namespace Script.Player.Army.ArmyLineUp
 {
@@ -24,6 +25,16 @@ namespace Script.Player.Army.ArmyLineUp
 
         public virtual void OnExitLineUp()
         {
+            
+        }
+
+        public void SpawnEffect(LineUp lineUp)
+        {
+            foreach (var soldier in soldiers)
+            {
+                EffectLineUpPooling.Instance.SpawnEffect(lineUp.ToString(),  soldier.transform, 2f);
+            }
+            
             
         }
     }

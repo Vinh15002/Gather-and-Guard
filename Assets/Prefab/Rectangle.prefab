@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2435605408011549930, guid: c3ce23558a23e2b4ba701f649b0ff567, type: 3}
       propertyPath: m_Name
-      value: attackSpeedUp Variant
+      value: Rectangle
       objectReference: {fileID: 0}
     - target: {fileID: 4130691741322834422, guid: c3ce23558a23e2b4ba701f649b0ff567, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4130691741322834422, guid: c3ce23558a23e2b4ba701f649b0ff567, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4130691741322834422, guid: c3ce23558a23e2b4ba701f649b0ff567, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.413628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4130691741322834422, guid: c3ce23558a23e2b4ba701f649b0ff567, type: 3}
       propertyPath: m_LocalRotation.w

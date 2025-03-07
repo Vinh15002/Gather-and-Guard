@@ -11,6 +11,7 @@ namespace Script.Player.Army.ArmyLineUp
             base.OnEnterLineUp();
             controller.SetTriangle();
             IncreaseDamage();
+            this.SpawnEffect(LineUp.Triangle);
         }
         
         public override void OnExitLineUp()

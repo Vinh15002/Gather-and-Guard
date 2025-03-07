@@ -17,7 +17,7 @@ namespace Script.ObjectPooling
             pooledObjects = new List<GameObject>();
         }
         
-        public GameObject GetPooledObject()
+        public virtual GameObject GetPooledObject()
         {
             for(int i = 0; i < pooledObjects.Count; i++)
             {

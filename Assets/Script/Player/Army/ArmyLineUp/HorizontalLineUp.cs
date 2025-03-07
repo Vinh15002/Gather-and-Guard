@@ -18,6 +18,7 @@ namespace Script.Player.Army.ArmyLineUp
             base.OnEnterLineUp();
             controller.SetHorizontal();
             InscreaseArmor();
+            this.SpawnEffect(LineUp.Horizontal);
         }
 
         public override void OnExecuteLineUp()

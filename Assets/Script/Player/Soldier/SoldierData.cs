@@ -10,7 +10,7 @@ public class SoldierData : MonoBehaviour
 
     [SerializeField] public float RangeAttack { get; private set; }
     
-    public float CoolDown { get; private set; }
+    public float SpeedAttack { get; private set; }
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class SoldierData : MonoBehaviour
         Damage = data.Damage;
         LocalScale = data.LocalScale;
         RangeAttack = data.RangeAttack;
-        CoolDown = data.CoolDownAttack;
+        SpeedAttack = data.SpeedAttack;
     }
 
 }

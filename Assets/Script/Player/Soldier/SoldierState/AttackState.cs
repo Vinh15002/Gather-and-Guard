@@ -9,10 +9,18 @@ using UnityEngine;
 public class AttackState : BaseState
 {
 
-    private float timeAttack = 0f;
+
     public AttackState(SoldierController soldierController, SoldierData soldierData, ManagerState managerState, string animName) : base(soldierController, soldierData, managerState, animName)
     {
-        timeAttack = 0f;
+
+        
+        
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        soldierController.Animator.speed = soldierData.SpeedAttack;
     }
 
 
@@ -34,28 +42,17 @@ public class AttackState : BaseState
 
 
         RotateDirectionAttack();
-        Attack();
+ 
 
     }
 
-    private void Attack()
+    public override void OnExit()
     {
-        if (timeAttack <= 0)
-        {
-
-          
-           
-            soldierController.SpawnWeapon();
-          
-            timeAttack = soldierData.CoolDown;
-        }
-        else
-        {
-            
-            timeAttack -=  Time.deltaTime;
-        }
-
+        base.OnExit();
+        soldierController.Animator.speed = 1;
     }
+
+
 
     
 

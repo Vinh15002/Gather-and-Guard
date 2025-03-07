@@ -28,6 +28,7 @@ namespace Script.ObjectPooling
             }
             
             GameObject objectPool = Instantiate(objectToPool, transform);
+            objectPool.name = objectToPool.name;
             pooledObjects.Add(objectPool);
             return objectPool;
         }

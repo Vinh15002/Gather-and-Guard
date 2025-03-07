@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 
 [CreateAssetMenu(fileName ="Soldier", menuName = "Data/Solider")]
@@ -10,5 +11,5 @@ public  class SoldierSO : ScriptableObject
 
     public float RangeAttack = 5;
 
-    public float CoolDownAttack = 1f;
+    public float SpeedAttack = 1f;
 }

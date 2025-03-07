@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Script.Event;
+using Script.Player.Army;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +18,8 @@ public class ArmyPlayer : MonoBehaviour
     [SerializeField] private PlayerUI playerUI;
     private ArmyMovement armyMovement;
 
+    
+    private LineUp lineUp = LineUp.Horizontal; 
     
 
 
@@ -39,11 +43,13 @@ public class ArmyPlayer : MonoBehaviour
     private void OnEnable()
     {
         PlayerEvent.addPlayer += AddPlayer;
+        ArmyEvent.ChangeLineUpArmy += ChangeLineUpArmy;
     }
 
     private void OnDisable()
     {
         PlayerEvent.addPlayer -= AddPlayer;
+        ArmyEvent.ChangeLineUpArmy += ChangeLineUpArmy;
     }
 
     private void AddPlayer(Vector3 postion)
@@ -51,10 +57,32 @@ public class ArmyPlayer : MonoBehaviour
         GameObject game =  Instantiate(playerPrefab, postion, Quaternion.identity, transform);
     
         players.Add(game.GetComponent<SoldierController>());
-        SetHorizontal();
+        ChangeLineUpArmy(this.lineUp);
     }
 
-    
+    private void ChangeLineUpArmy(LineUp lineUp)
+    {
+        if (lineUp == LineUp.Horizontal)
+        {
+            SetHorizontal();
+        }
+        else if (lineUp == LineUp.Vertical)
+        {
+            SetVertical();
+        }
+        else if (lineUp == LineUp.Triangle)
+        {
+            if (players.Count <= 3) return;
+            else SetTriangle();
+        }
+        else if (lineUp == LineUp.Rectangle)
+        {
+            if (players.Count <= 3) return;
+            else SetRectangle();
+        }
+
+        this.lineUp = lineUp;
+    }
 
 
     [ContextMenu("Horizontal")]
@@ -80,7 +108,7 @@ public class ArmyPlayer : MonoBehaviour
     }
 
     [ContextMenu("Triangle")]
-    public void Triangle()
+    public void SetTriangle()
     {
         List<Vector3> lineup = ArmyFormation.Triangle(players.Count);
         
@@ -94,7 +122,7 @@ public class ArmyPlayer : MonoBehaviour
     }
 
     [ContextMenu("Rectangle")]
-    public void Rectangle()
+    public void SetRectangle()
     {
         List<Vector3> lineup = ArmyFormation.Rectangle(players.Count);
         

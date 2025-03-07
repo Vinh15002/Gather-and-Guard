@@ -16,4 +16,4 @@ MonoBehaviour:
   Damage: 10
   LocalScale: 1
   RangeAttack: 10
-  CoolDownAttack: 2
+  SpeedAttack: 1

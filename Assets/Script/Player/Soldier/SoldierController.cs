@@ -36,7 +36,7 @@ public class SoldierController : MonoBehaviour
 
     private void Start()
     {
-
+        
         ManagerState = new ManagerState();
         SoldierData = GetComponent<SoldierData>();
         Idle = new IdleState(this, SoldierData, ManagerState, "Idle");
@@ -44,6 +44,7 @@ public class SoldierController : MonoBehaviour
         Attack = new AttackState(this, SoldierData, ManagerState, "Attack");
         transform.localScale = Vector3.one * SoldierData.LocalScale;
         Animator = GetComponent<Animator>();
+        
         RB = GetComponent<Rigidbody>();
         ManagerState.Initilize(Idle);
     }
@@ -76,24 +77,28 @@ public class SoldierController : MonoBehaviour
     }
 
 
+    
+    // Add by Event of Animator;
     public void SpawnWeapon()
     {
-        StartCoroutine(RemoveWeaponCouroutine());
-    }
-
-    private IEnumerator RemoveWeaponCouroutine()
-    {
-        
-        yield return new WaitForSeconds(0.05f);
-        this.WeaponTarget.gameObject.SetActive(false);
         GameObject weapon = WeaponPooling.Instance.GetPooledObject();
         weapon.transform.position = WeaponTarget.position;
+        weapon.transform.rotation = WeaponTarget.rotation;
+        this.WeaponTarget.gameObject.SetActive(false);
         weapon.SetActive(true);
-        weapon.GetComponent<WeaponMovement>().SetTarget(target.position, weapon.transform.position, SoldierData.CoolDown - 0.1f);
+        weapon.GetComponent<WeaponMovement>().SetTarget(target.position, weapon.transform.position, 1.5f);
         weapon.GetComponent<WeaponDealDamage>().SetDamage(SoldierData.Damage);
-        yield return new WaitForSeconds(SoldierData.CoolDown - 0.1f);
+    }
+
+    // Add By Event of Animator
+    public void SetActiveWeapon()
+    {
         this.WeaponTarget.gameObject.SetActive(true);
     }
+
+ 
+
+
 
  
 

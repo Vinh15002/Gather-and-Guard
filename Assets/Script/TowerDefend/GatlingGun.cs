@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class GatlingGun : MonoBehaviour
 {
-    // Target the gun will aim at
-    public Transform go_target;
-
     // GameObjects to control rotation and aiming
     public Transform go_baseRotation;
     public Transform go_GunBody;
@@ -14,10 +11,8 @@ public class GatlingGun : MonoBehaviour
 
     // Gun barrel rotation
     public float barrelRotationSpeed;
+    public float rangeAttack = 10f;
     private float currentRotationSpeed;
-
-    // Distance the turret can aim and fire from
-    public float firingRange;
 
     // Particle system for the muzzle flash
     public ParticleSystem muzzleFlash;
@@ -25,49 +20,25 @@ public class GatlingGun : MonoBehaviour
     // Used to start and stop the turret firing
     public bool canFire = false;
 
-    void Start()
-    {
-        // Set the firing range distance
-        SphereCollider collider = this.GetComponent<SphereCollider>();
-        if (collider != null)
-        {
-            collider.radius = firingRange;
-        }
-    }
-
     void Update()
     {
-        AimAndFire();
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, rangeAttack);
+
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                float distance = Vector3.Distance(transform.position, hit.transform.position);
+                canFire = distance<rangeAttack;
+                AimAndFire(hit.transform);
+            }
+        }
+
+        
     }
-
-    // void OnDrawGizmosSelected()
-    // {
-    //     // Draw a red sphere at the transform's position to show the firing range
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawWireSphere(transform.position, firingRange);
-    // }
-
-    // Detect an enemy, aim and fire
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Enemy"))
-    //     {
-    //         go_target = other.transform;
-    //         canFire = true;
-    //     }
-    // }
-
-    // // Stop firing
-    // void OnTriggerExit(Collider other)
-    // {
-    //     if (other.CompareTag("Enemy"))
-    //     {
-    //         canFire = false;
-    //         go_target = null; // Reset target when exiting
-    //     }
-    // }
     
-    void AimAndFire()
+    void AimAndFire(Transform target)
     {
         // Gun barrel rotation
         go_barrel.transform.Rotate(0, 0, currentRotationSpeed * Time.deltaTime);
@@ -78,10 +49,10 @@ public class GatlingGun : MonoBehaviour
             currentRotationSpeed = barrelRotationSpeed;
 
             // Aim at enemy
-            if (go_target != null)
+            if (target != null)
             {
-                Vector3 baseTargetPosition = new Vector3(go_target.position.x, transform.position.y, go_target.position.z);
-                Vector3 gunBodyTargetPosition = go_target.position;
+                Vector3 baseTargetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+                Vector3 gunBodyTargetPosition = target.position;
 
                 go_baseRotation.LookAt(baseTargetPosition);
                 go_GunBody.LookAt(gunBodyTargetPosition);

@@ -5,15 +5,15 @@ namespace Script.ObjectPooling
 {
     public class ObjectPooling : MonoBehaviour
     {
-        public static ObjectPooling Instance;
+        
         public List<GameObject> pooledObjects;
         public GameObject objectToPool;
      
         
 
-        public void Start()
+        public virtual void Awake()
         {
-            Instance = this;
+          
             pooledObjects = new List<GameObject>();
         }
         

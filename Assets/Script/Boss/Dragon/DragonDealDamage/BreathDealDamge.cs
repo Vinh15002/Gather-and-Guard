@@ -15,7 +15,7 @@ namespace Script.Boss.Dragon
             }
         }
 
-        private void OnParticleCollision(Collider other)
+        private void OnParticleCollision(GameObject other)
         {
             if (timeDealDamage < 0 && other.CompareTag("Player"))
             {
@@ -23,5 +23,10 @@ namespace Script.Boss.Dragon
                 timeDealDamage = 1f;
             }
         }
+
+        // private void OnParticleCollision()
+        // {
+
+        // }
     }
 }

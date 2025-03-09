@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 224eabc8f2d7cc54a8648d26f1a1b5f2
-AssemblyDefinitionImporter:
+guid: d583bfe3b4c961241ad4cf33559a195f
+TextScriptImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
@@ -10,5 +10,6 @@ AssetOrigin:
   productId: 109565
   packageName: Cartoon FX Remaster Free
   packageVersion: R 1.4.2
-  assetPath: Assets/AssetPackage/JMO Assets/Welcome Screen/CFXR.WelcomeScreen.asmdef
+  assetPath: Assets/AssetPackage/VFX/Cartoon FX Remaster/Readme Cartoon FX Remaster
+    FREE.html
   uploadId: 717883

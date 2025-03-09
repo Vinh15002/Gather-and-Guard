@@ -66,6 +66,6 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
-
+    
 
 }

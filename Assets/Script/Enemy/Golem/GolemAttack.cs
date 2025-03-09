@@ -8,11 +8,13 @@ public class GolemAttack : EnemyAttack
     private EnemyControl enemyControl;
     public SphereCollider impactLeg;
     public SphereCollider impactHand;
+    public GameObject effectImpact;
 
     void Start()
     {
         animator = GetComponentInParent<Animator>();
         enemyControl = GetComponentInParent<EnemyControl>();
+        effectImpact.SetActive(false);
     }
     protected override void OnAttack(GameObject gameObject)
     {
@@ -26,4 +28,6 @@ public class GolemAttack : EnemyAttack
             
         }
     }
+
+    
 }

@@ -10,6 +10,7 @@ namespace Script.Boss.Dragon.DragonState
         {
             base.OnEnter();
             DragonController.Animatior.SetBool("IsGrounded", false);
+            DragonController.Animatior.SetBool("Fly", true);
         }
         
         public override void OnExecute()
@@ -35,6 +36,11 @@ namespace Script.Boss.Dragon.DragonState
             
             
             
+        }
+
+        public override void OnExit()
+        {
+            DragonController.Animatior.SetBool("Fly", false);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Script.Boss.Dragon
 {
     public class BreathDealDamge : DealDamage
     {
-        private float timeDealDamage = 1f;
+        private float timeDealDamage = 0f;
 
         private void FixedUpdate()
         {
@@ -17,10 +17,10 @@ namespace Script.Boss.Dragon
 
         private void OnParticleCollision(GameObject other)
         {
-            if (timeDealDamage < 0 && other.CompareTag("Player"))
+            if (timeDealDamage <= 0 && other.CompareTag("Player"))
             {
                 Debug.Log("Dealing damage");
-                timeDealDamage = 1f;
+                timeDealDamage = 0.2f;
             }
         }
 

@@ -8,7 +8,7 @@ namespace Script.Boss.Dragon
         public int health = 100;
         public float speedMovement = 4;
         public int attackDamage = 10;
-        public float attackSpeed = 5f;
+        public float attackSpeed = 15f;
         public int armor = 5;
         
     }

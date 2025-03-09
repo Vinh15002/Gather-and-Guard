@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.Bullet
@@ -10,10 +11,18 @@ namespace Script.Bullet
 
         private void OnTriggerEnter(Collider other)
         {
+           
             if (other.CompareTag(targetName))
             {
                 Debug.Log("Hit target");
+                //this.gameObject.SetActive(false);
             }
+
+            if (other.CompareTag("Ground"))
+            {
+                this.gameObject.SetActive(false);
+            }
+            
         }
 
 

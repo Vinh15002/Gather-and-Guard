@@ -18,6 +18,8 @@ namespace Script.Boss.Dragon
         public DragonData DragonData { get; private set; }
         public DragonMovement DragonMovement { get; private set; }
         
+        public DragonEffect DragonEffect { get; private set; }  
+        
         
       
         public enum DragonEnum
@@ -51,6 +53,7 @@ namespace Script.Boss.Dragon
             Animatior = GetComponent<Animator>();
             DragonData = GetComponent<DragonData>();
             DragonMovement =  GetComponent<DragonMovement>();
+            DragonEffect = GetComponent<DragonEffect>();
             ManagerState = new ManagerState(); 
             IdleState = new IdleState(this, DragonData, "Idle" );
             WalkState = new WalkState(this, DragonData, "Ground" );
@@ -145,9 +148,10 @@ namespace Script.Boss.Dragon
         public void SpawnDragonBall()
         {
             GameObject bulletDragon = BulletPooling.Instance.SpawnBullet(TypeBullet.DragonBall);
-            bulletDragon.SetActive(true);
+            bulletDragon.SetActive(false);
             bulletDragon.GetComponent<BulletMovement>().SetMovement(positionOffset.position, Target.position,DragonData.attackSpeed);
             bulletDragon.GetComponent<BulletDamage>().SetTarget(DragonData.attackDamage, "Player");
+            bulletDragon.SetActive(true);
         }
 
     }

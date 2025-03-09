@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Script.Boss.Dragon.DragonState
 {
     public class GroundState : BaseState
@@ -6,8 +8,16 @@ namespace Script.Boss.Dragon.DragonState
         {
             
         }
-
-     
+        
+        public override void OnEnter()
+        {
+            DragonController.Animatior.SetBool("Ground", true);
+        }
+        
+        public override void OnExit()
+        {
+            DragonController.Animatior.SetBool("Ground", false);
+        }
         
     }
 }

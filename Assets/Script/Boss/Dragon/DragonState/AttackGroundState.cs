@@ -35,6 +35,8 @@ namespace Script.Boss.Dragon.DragonState
                 }
             }
             
+           
+            
         }
 
 
@@ -42,6 +44,9 @@ namespace Script.Boss.Dragon.DragonState
         {
             base.OnExit();
             DragonController.Animatior.SetBool("Attack", false);
+            DragonController.DragonEffect.TurnOffGatherEnegy();
+            DragonController.DragonEffect.TurnOffDragonBreath();
+            DragonController.DragonEffect.TurnOffDragonElectric();
         }
     }
 }

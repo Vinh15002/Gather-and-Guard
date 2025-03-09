@@ -66,10 +66,6 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
-    // Event of Animation attack
-    public void SpawnEffect(){
-        GameObject effect = GetComponentInChildren<GolemAttack>().effectImpact;
-        effect.SetActive(true);
-    }
+    
 
 }

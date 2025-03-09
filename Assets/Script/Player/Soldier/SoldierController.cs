@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using Script.ObjectPooling;
 using Script.Player.Soldier;
+using Script.Player.Soldier.SoldierState;
 using Script.Weapon;
+
 using UnityEngine;
 
 public class SoldierController : MonoBehaviour

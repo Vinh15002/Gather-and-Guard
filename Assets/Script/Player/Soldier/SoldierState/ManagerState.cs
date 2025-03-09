@@ -1,18 +1,21 @@
-﻿public class ManagerState
+﻿namespace Script.Player.Soldier.SoldierState
 {
-    public BaseState CurrentState {  get; set; }
-
-
-    public void Initilize(BaseState state)
+    public class ManagerState
     {
-        CurrentState = state;
-        CurrentState.OnEnter();
-    }
+        public BaseState CurrentState {  get; set; }
 
-    public void ChangeState(BaseState newState)
-    {
-        CurrentState.OnExit();
-        CurrentState = newState;
-        CurrentState.OnEnter();
+
+        public void Initilize(BaseState state)
+        {
+            CurrentState = state;
+            CurrentState.OnEnter();
+        }
+
+        public void ChangeState(BaseState newState)
+        {
+            CurrentState.OnExit();
+            CurrentState = newState;
+            CurrentState.OnEnter();
+        }
     }
 }

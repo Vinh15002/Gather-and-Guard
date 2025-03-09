@@ -6,20 +6,30 @@ public class EnemyFindTarget : MonoBehaviour
 
 
 
-    protected virtual void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            SetTargetPlayer(other);
             
-            GetComponentInParent<EnemyControl>().SetTarget(other.transform);
         }
+    }
+    
+    protected virtual void SetTargetPlayer(Collider other){
+        GetComponentInParent<EnemyControl>().SetTarget(other.transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            GetComponentInParent<EnemyControl>().SetTarget(null);
+            SetDisTargetPlayer(other);
+            
         }
+    }
+
+    protected virtual void SetDisTargetPlayer(Collider other)
+    {
+        GetComponentInParent<EnemyControl>().SetTarget(null);
     }
 }

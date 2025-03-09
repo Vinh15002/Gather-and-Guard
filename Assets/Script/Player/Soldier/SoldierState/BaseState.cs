@@ -1,29 +1,32 @@
-﻿public class BaseState
+﻿namespace Script.Player.Soldier.SoldierState
 {
-    protected SoldierController soldierController;
-    protected SoldierData soldierData;
-    protected ManagerState managerState;
-    protected string animaName;
-
-    public BaseState(SoldierController soldierController, SoldierData soldierData, ManagerState managerState, string animName)
+    public class BaseState
     {
-        this.soldierController = soldierController;
-        this.soldierData = soldierData;
-        this.managerState = managerState;
-        this.animaName = animName;
-    }
+        protected SoldierController soldierController;
+        protected SoldierData soldierData;
+        protected ManagerState managerState;
+        protected string animaName;
 
-    public virtual void OnEnter() { 
-        soldierController.Animator.SetBool(animaName, true);
+        public BaseState(SoldierController soldierController, SoldierData soldierData, ManagerState managerState, string animName)
+        {
+            this.soldierController = soldierController;
+            this.soldierData = soldierData;
+            this.managerState = managerState;
+            this.animaName = animName;
+        }
+
+        public virtual void OnEnter() { 
+            soldierController.Animator.SetBool(animaName, true);
     
-    }
+        }
 
-    public virtual void OnExecute() {
-        //Chuyen State 
-    }
+        public virtual void OnExecute() {
+            //Chuyen State 
+        }
 
-    public virtual void OnExit() {
-        soldierController.Animator.SetBool(animaName, false);
+        public virtual void OnExit() {
+            soldierController.Animator.SetBool(animaName, false);
 
+        }
     }
 }

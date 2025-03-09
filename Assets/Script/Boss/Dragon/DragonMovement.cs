@@ -16,7 +16,7 @@ namespace Script.Boss.Dragon
         private void Start()
         {
             Controller = GetComponent<DragonController>();
-            speedMovement = Controller.DragonData.SpeedMovement;
+            speedMovement = Controller.DragonData.speedMovement;
         }
 
         private void FixedUpdate()

@@ -7,7 +7,7 @@ namespace Script.ObjectPooling
     {
         
         public List<GameObject> pooledObjects;
-        public GameObject objectToPool;
+        [SerializeField]private GameObject objectToPool;
      
         
 
@@ -29,8 +29,15 @@ namespace Script.ObjectPooling
             
             GameObject objectPool = Instantiate(objectToPool, transform);
             objectPool.name = objectToPool.name;
+            
             pooledObjects.Add(objectPool);
             return objectPool;
+        }
+
+
+        public void SetObjectPool(GameObject objectPool)
+        {
+            this.objectToPool = objectPool;
         }
 
 

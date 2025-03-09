@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Boss.Dragon
 {
     public class DragonData : MonoBehaviour
     {
-        public int Health = 100;
-        public float SpeedMovement = 4;
-        public int AttackDamage = 10;
-        public float AttackSpeed = 1;
-        public int Armor = 5;
+        public int health = 100;
+        public float speedMovement = 4;
+        public int attackDamage = 10;
+        public float attackSpeed = 5f;
+        public int armor = 5;
+        
     }
 }

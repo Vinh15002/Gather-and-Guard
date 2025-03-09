@@ -1,6 +1,8 @@
 
 
 using Script.Boss.Dragon.DragonState;
+using Script.Bullet;
+using Script.ObjectPooling;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,8 +10,8 @@ namespace Script.Boss.Dragon
 {
     public class DragonController : MonoBehaviour
     {
-        
-        
+
+        public Transform positionOffset;
         
         public LayerMask layerGroundMask;
         public Animator Animatior { get; private set; }
@@ -139,6 +141,14 @@ namespace Script.Boss.Dragon
             
         }
 
+
+        public void SpawnDragonBall()
+        {
+            GameObject bulletDragon = BulletPooling.Instance.SpawnBullet(TypeBullet.DragonBall);
+            bulletDragon.SetActive(true);
+            bulletDragon.GetComponent<BulletMovement>().SetMovement(positionOffset.position, Target.position,DragonData.attackSpeed);
+            bulletDragon.GetComponent<BulletDamage>().SetTarget(DragonData.attackDamage, "Player");
+        }
 
     }
 }

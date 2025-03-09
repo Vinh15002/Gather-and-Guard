@@ -5,13 +5,16 @@ namespace Script.Boss.Dragon
 {
     public class DragonAttack : MonoBehaviour
     {
+
+       
+        
         private int damage;
         public DragonController DragonController { get; private set; }
 
         private void Start()
         {
             DragonController = GetComponentInParent<DragonController>();
-            damage = DragonController.DragonData.AttackDamage;
+            damage = DragonController.DragonData.attackDamage;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -37,5 +40,11 @@ namespace Script.Boss.Dragon
         {
             DragonController.IsAttack = true;
         }
+
+
+       
+        
+        
+        
     }
 }

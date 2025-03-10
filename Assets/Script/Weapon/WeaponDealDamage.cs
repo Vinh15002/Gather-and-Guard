@@ -25,9 +25,9 @@ namespace Script.Weapon
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag( "House"))
+            if (other.CompareTag( "House") || other.CompareTag("Enemy"))
             {
-                
+              
                 other.GetComponent<IHealthDamage>().Damage(Damage);
                 StartCoroutine(weaponMovement.DestroyObjectCourutine());
             }

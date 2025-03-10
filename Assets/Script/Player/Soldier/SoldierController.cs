@@ -7,6 +7,7 @@ using Script.Player.Soldier.SoldierState;
 using Script.Weapon;
 
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SoldierController : MonoBehaviour
 {
@@ -94,7 +95,9 @@ public class SoldierController : MonoBehaviour
         weapon.transform.rotation = WeaponTarget.rotation;
         this.WeaponTarget.gameObject.SetActive(false);
         weapon.SetActive(true);
-        weapon.GetComponent<WeaponMovement>().SetTarget(target.position, weapon.transform.position, 1.5f);
+        
+        Vector3 targetPosition = new Vector3(target.position.x + Random.Range(-0.3f,0.3f), target.position.y, target.position.z +  Random.Range(-0.3f,0.3f));
+        weapon.GetComponent<WeaponMovement>().SetTarget(targetPosition, weapon.transform.position, 1.5f);
         weapon.GetComponent<WeaponDealDamage>().SetDamage(SoldierData.Damage);
     }
 

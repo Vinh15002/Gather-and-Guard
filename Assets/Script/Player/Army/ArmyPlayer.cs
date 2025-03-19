@@ -14,7 +14,7 @@ public class ArmyPlayer : MonoBehaviour
 
     public GameObject playerPrefab;
     public List<SoldierController> Players { get; private set; }
-
+    public int GetAmoutPlayer()=>transform.childCount;
 
    
     [SerializeField] private PlayerUI playerUI;
@@ -30,12 +30,14 @@ public class ArmyPlayer : MonoBehaviour
     public TriangleLineUp  TriangleLineUp { get; private set; }
     public RectangleLineUp RectangleLineUp { get; private set; }
 
+    public static ArmyPlayer Instance;
+
     #endregion
     
 
     private void Awake()
     {
-        
+        Instance = this;
         Players = new List<SoldierController>();
         foreach(Transform t in transform)
         {

@@ -12,5 +12,11 @@ public class ParticleCollision : MonoBehaviour
             Debug.Log("Particle hit: " + other.name);
             
         }
+        if (other.CompareTag("Player"))
+        {
+            
+            Debug.Log("Particle hit: " + other.name);
+            
+        }
     }
 }

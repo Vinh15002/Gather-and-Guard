@@ -9,6 +9,7 @@ public class DetailMission : MonoBehaviour
     public MissionSO missionSO;
     public Sprite spriteOn;
     public Sprite spriteOff;
+    public Sprite spriteProcess;
     private Image imageM;
     private TextMeshProUGUI nameM;
     private TextMeshProUGUI describeM;
@@ -29,14 +30,28 @@ public class DetailMission : MonoBehaviour
         txtReqTime = transform.Find("Requiment").Find("time").GetComponent<TextMeshProUGUI>();
         btnConfirm = transform.Find("BtnConfirm").GetComponent<Button>();
         btnConfirm.onClick.AddListener(OnClickConfirm);
+        
+        if(missionSO.isComplete){
+            transform.gameObject.SetActive(false);
+            SetCompleteMission();
+        } 
+        else{
+            GetComponent<CompleteMission>().DisActiveGOComplete();
+        }
     }
-    void OnEnable()
+    private void OnEnable()
     {
         SetStaticDetail();
         SetDynamicDetail();
         SetBtnForReq();
     }
-   
+    
+    public void UpdateMission(){
+        SetCompleteMission();
+        if(missionSO.isComplete){
+            transform.gameObject.SetActive(false);
+        }       
+    }
     public void SetStaticDetail(){
         imageM.sprite = missionSO.ImageMission;
         nameM.text = missionSO.NameMission;
@@ -61,11 +76,25 @@ public class DetailMission : MonoBehaviour
     
     public void OnClickConfirm(){
         if(btnConfirm.GetComponent<Image>().sprite == spriteOn){
-            ProgressBar.Instance.ExecuteProgress(missionSO.TimeToComplete, missionSO.TypeMission);
-            Debug.Log("Can do");
+            if(!ProgressBar.Instance.isProgress){
+
+                ProgressBar.Instance.ExecuteMission(missionSO.TimeToComplete, missionSO.TypeMission,this.gameObject);
+                btnConfirm.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Thực hiện";
+                btnConfirm.GetComponent<Image>().sprite = spriteProcess;
+
+            }
+            else{
+                Debug.Log("In progress other mission");
+            }
+            
         }
         else{
             Debug.Log("Can't do");
         }
+    }
+
+    private void SetCompleteMission(){
+        missionSO.isComplete = true;
+        GetComponent<CompleteMission>().ActiveGOComplete();
     }
 }

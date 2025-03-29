@@ -11,4 +11,5 @@ public class MissionSO : ScriptableObject
     public int RequimentGold;
     public int TimeToComplete;
     public int TypeMission;
+    public bool isComplete;
 }

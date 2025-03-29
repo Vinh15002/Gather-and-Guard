@@ -6,13 +6,14 @@ using UnityEngine.UIElements.Experimental;
 
 public class ProgressBar : MonoBehaviour
 {
+    private GameObject holderM;
     public Sprite iconTrain;
     public Sprite iconSetting;
     public Sprite iconContact;
     public Sprite iconBuild;
     private Slider slider;
     private Image icon;
-    private bool isProgress = false;
+    public bool isProgress {get; private set;}
     private float timeProgress = -1f;
     public static ProgressBar Instance;
 
@@ -23,14 +24,21 @@ public class ProgressBar : MonoBehaviour
         icon = transform.Find("Icon").GetComponent<Image>();
     }
 
-    public void ExecuteProgress(float time, int type){
+    public void ExecuteMission(float time, int type, GameObject holder){
         GetTimeProgress(time);
         SetIcon(type);
         if(isProgress && timeProgress>0){
+            AddHolder(holder);
             StartCoroutine(ExecuteMission());
         }
     }
 
+    public void AddHolder(GameObject game){
+        holderM = game;
+    }
+    public void MessageComplete(){
+        
+    }
     public void SetIcon(int type){
         if(type==0){
             icon.sprite = iconBuild;
@@ -49,6 +57,7 @@ public class ProgressBar : MonoBehaviour
 
     public void GetTimeProgress(float time){
         if(!isProgress){
+            Debug.Log("New mission");
             isProgress = true;
             timeProgress = time;
         }
@@ -63,7 +72,8 @@ public class ProgressBar : MonoBehaviour
             slider.value = time/timeProgress;
             Debug.Log(time/timeProgress);
         }
-        Debug.Log("Complete");
+        holderM.GetComponent<CompleteMission>().ActiveGOComplete();
+        holderM.GetComponent<DetailMission>().UpdateMission();
         isProgress = false;
         timeProgress = -1;
     }
